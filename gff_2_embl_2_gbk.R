@@ -23,7 +23,7 @@ gff3_2_embl <- function(gff3,
                 "\'", description, "\'", ' ',
                 gff3)
   
-  cmd <- 'singularity exec /export/home/iferres/singularity_images/gff3toembl_latest.sif gff3_to_embl'
+  cmd <- 'singularity exec /mnt/ubi/iferres/singularity_images/gff3toembl_latest.sif gff3_to_embl'
   
   stout <- system(paste(cmd, arg), intern = T)
   
