@@ -1,0 +1,48 @@
+##########
+## PANX ##
+##########
+# pull:
+singularity pull docker://quay.io/biocontainers/panx:1.6.0--py27_0
+# run:
+singularity exec panx_1.6.0--py27_0.sif panX.py -h
+
+####################
+## GET_HOMOLOGUES ##
+####################
+# pull:
+singularity pull docker://csicunam/get_homologues
+# run
+singularity exec get_homologues_latest.sif get_homologues.pl -h
+
+#############
+## SATURNV ##
+#############
+# pull 
+singularity pull docker://incognition/saturnv
+# run
+No estaría encontrando el ejecutable
+
+############
+## PANOCT ##
+############
+# pull 
+singularity pull docker://quay.io/biocontainers/panoct:3.23--pl526_1
+# run
+singularity exec panoct_3.23--pl526_1.sif panoct.pl
+
+###########
+## ROARY ##
+###########
+# pull
+singularity pull docker:sangerpathogens/roary
+# run
+singularity exec roary_latest.sif roary
+
+##########
+## PGAP ##
+##########
+# pull
+singularity pull docker:kastman/pgap
+# run
+singularity exec pgap_latest.sif /pgap/PGAP.pl
+
