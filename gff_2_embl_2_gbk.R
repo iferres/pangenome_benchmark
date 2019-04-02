@@ -1,5 +1,5 @@
 # from gff to genbank (and embl)
-#> singularity pull docker:sangerpathogens/gff3toembl
+
 gff3_2_embl <- function(gff3, 
                         authors = 'John', 
                         title = 'Some Title',
@@ -23,7 +23,7 @@ gff3_2_embl <- function(gff3,
                 "\'", description, "\'", ' ',
                 gff3)
   
-  cmd <- 'singularity exec /mnt/ubi/iferres/singularity_images/gff3toembl_latest.sif gff3_to_embl'
+  cmd <- 'singularity exec /export/home/iferres/singularity_images/gff3toembl_latest.sif gff3_to_embl'
   
   stout <- system(paste(cmd, arg), intern = T)
   
@@ -83,29 +83,35 @@ embl_2_gbk <- function(x, file){
   contig <- sub('[^contig\\d+]+', '', grep('^AC.+contig\\d+', x, value = TRUE))
   large <- regmatches(x[1], regexpr('\\d+ BP.', x[1]))
   large <- sub('BP[.]', 'bp', large)
-  L1 <- paste('LOCUS', contig, large, 'DNA', 'linear', '01-APR-2019', sep='\t')
+  L1 <- paste('LOCUS       ', 
+              contig, '             ',
+              large, '    ',
+              'DNA     ', 
+              'circular ', 
+              '01-APR-2019', 
+              sep='')
   
   #Line 2
-  L2 <- paste('DEFINITION\tGenus species strain strain.')
+  L2 <- paste('DEFINITION  Genus species strain strain.')
   
-  L3 <- paste('ACCESSION\t')
+  L3 <- paste('ACCESSION   ')
   
-  L4 <- paste('VERSION\t')
+  L4 <- paste('VERSION     ')
   
   #Line 5
   KW <- sub('^KW[ ]+','',grep('^KW[ ]+', x, value = TRUE))
-  L5 <- paste('KEYWORDS', KW, sep = '\t')
+  L5 <- paste('KEYWORDS    ', KW, sep = '')
   
   #Line 6
   organism <- sub('^OS[ ]+','',grep('^OS[ ]+', x, value = TRUE))
-  L6 <- paste('SOURCE', organism, sep = '\t')
+  L6 <- paste('SOURCE      ', organism, sep = '')
   
-  L7 <- paste('  ORGANISM', organism, sep = '\t')
+  L7 <- paste('  ORGANISM  ', organism, sep = '')
   
-  L8 <- paste('COMMENT', 'This is a fake GenBank file.')
+  L8 <- paste('COMMENT     ', 'This is a fake GenBank file.', sep='')
   
   features <- gsub('FH|[ ]|Key','',grep('^FH[ ]+Key[ ]+', x, value = TRUE))
-  L9 <- paste('FEATURES', features, sep = '\t')
+  L9 <- paste('FEATURES             ', features, sep = '')
   
   L10 <- sub('^FT','',grep('^FT', x, value = T))
   
