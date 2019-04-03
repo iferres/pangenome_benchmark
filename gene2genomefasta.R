@@ -1,4 +1,4 @@
-
+setwd('evo_times/')
 
 library(seqinr)
 fi <- list.files(path='.', 
