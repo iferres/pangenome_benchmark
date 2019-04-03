@@ -166,5 +166,17 @@ gff_2_embl_2_gbk <- function(gff){
 }
 
 
-
+move_files <- function(pattern){
+  
+  fi <- list.files(pattern = pattern, 
+                   full.names = TRUE, 
+                   recursive = TRUE)
+  
+  bas <- basename(dirname(fi))
+  nw_fi_path <- paste('genomes_', pattern,'/', bas, sep ='')
+  un <- unique(nw_fi_path)
+  sapply(un, dir.create, recursive = T)
+  to <- paste(nw_fi_path, basename(fi), sep = '/')
+  file.rename(fi, to)
+}
 
