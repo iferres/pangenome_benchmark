@@ -113,7 +113,7 @@ embl_2_gbk <- function(x, file){
   features <- gsub('FH|[ ]|Key','',grep('^FH[ ]+Key[ ]+', x, value = TRUE))
   L9 <- paste('FEATURES             ', features, sep = '')
   
-  L10 <- sub('^FT','',grep('^FT', x, value = T))
+  L10 <- sub('^FT','  ',grep('^FT', x, value = T))
   
   
   #L11: translation 
