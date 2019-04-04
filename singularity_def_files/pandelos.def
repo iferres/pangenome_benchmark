@@ -1,0 +1,17 @@
+Bootstrap: library
+From: ubuntu:18.04
+
+%post
+	apt-get update
+	apt-get install -y git python3 python3-pip efetch default-jdk
+	pip3 install biopython networkx
+	git clone https://github.com/InfOmics/PanDelos
+
+%environment
+	export PANDELOS_PATH='/PanDelos'
+	
+%runscript
+	bash /PanDelos/pandelos.sh
+
+%labels 
+	author Ignacio Ferres
